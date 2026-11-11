@@ -9,25 +9,30 @@ import {
 
 type Props = {
   activity: Activity;
+  cancelActivity(): void;
 };
 
-export default function ActivityDetail({ activity }: Props) {
+export default function ActivityDetail({ activity, cancelActivity }: Props) {
+  const { title, description, category, date } = activity;
+
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardMedia
         component="img"
-        src={`/images/categoryImages/${activity.category}.jpg`}
+        src={`/images/categoryImages/${category}.jpg`}
       />
       <CardContent>
-        <Typography variant="h5">{activity.title}</Typography>
+        <Typography variant="h5">{title}</Typography>
         <Typography variant="subtitle1" sx={{ fontWeight: "light" }}>
-          {activity.date}
+          {date}
         </Typography>
-        <Typography variant="body1">{activity.description}</Typography>
+        <Typography variant="body1">{description}</Typography>
       </CardContent>
       <CardActions>
         <Button color="primary">Edit</Button>
-        <Button color="inherit">Cancel</Button>
+        <Button onClick={cancelActivity} color="inherit">
+          Cancel
+        </Button>
       </CardActions>
     </Card>
   );

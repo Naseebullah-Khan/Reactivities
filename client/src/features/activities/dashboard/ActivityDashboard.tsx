@@ -4,16 +4,26 @@ import ActivityDetail from "../details/ActivityDetail";
 
 type Props = {
   activities: Activity[];
+  activity: Activity | undefined;
+  handleActivity(id: string): void;
+  cancelActivity(): void;
 };
 
-export default function ActivityDashboard({ activities }: Props) {
+export default function ActivityDashboard({
+  activities,
+  activity,
+  handleActivity,
+  cancelActivity,
+}: Props) {
   return (
     <Grid container spacing={3}>
       <Grid size={7}>
-        <ActivityList activities={activities} />
+        <ActivityList activities={activities} handleActivity={handleActivity} />
       </Grid>
       <Grid size={5}>
-        {activities[0] && <ActivityDetail activity={activities[0]} />}
+        {activity && (
+          <ActivityDetail activity={activity} cancelActivity={cancelActivity} />
+        )}
       </Grid>
     </Grid>
   );

@@ -3,13 +3,18 @@ import ActivityCard from "./ActivityCard";
 
 type Props = {
   activities: Activity[];
+  handleActivity(id: string): void;
 };
 
-export default function ActivityList({ activities }: Props) {
+export default function ActivityList({ activities, handleActivity }: Props) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
       {activities.map((activity) => (
-        <ActivityCard activity={activity} />
+        <ActivityCard
+          key={activity.id}
+          activity={activity}
+          handleActivity={handleActivity}
+        />
       ))}
     </Box>
   );
