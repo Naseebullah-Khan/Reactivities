@@ -10,10 +10,15 @@ import {
 type Props = {
   activity: Activity;
   cancelActivity(): void;
+  handleForm: (id?: string) => void;
 };
 
-export default function ActivityDetail({ activity, cancelActivity }: Props) {
-  const { title, description, category, date } = activity;
+export default function ActivityDetail({
+  activity,
+  cancelActivity,
+  handleForm,
+}: Props) {
+  const { id, title, description, category, date } = activity;
 
   return (
     <Card sx={{ borderRadius: 3 }}>
@@ -29,7 +34,9 @@ export default function ActivityDetail({ activity, cancelActivity }: Props) {
         <Typography variant="body1">{description}</Typography>
       </CardContent>
       <CardActions>
-        <Button color="primary">Edit</Button>
+        <Button color="primary" onClick={() => handleForm(id)}>
+          Edit
+        </Button>
         <Button onClick={cancelActivity} color="inherit">
           Cancel
         </Button>

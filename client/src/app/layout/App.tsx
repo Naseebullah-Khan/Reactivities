@@ -7,6 +7,7 @@ import ActivityDashboard from "../../features/activities/dashboard/ActivityDashb
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [activity, setActivity] = useState<Activity | undefined>(undefined);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
     axios
@@ -22,16 +23,32 @@ function App() {
     setActivity(undefined);
   }
 
+  function handleForm(id?: string) {
+    if (id) {
+      handleActivity(id);
+    } else {
+      cancelActivity();
+    }
+    setEditMode(true);
+  }
+
+  function closeForm() {
+    setEditMode(false);
+  }
+
   return (
     <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
-      <NavBar />
+      <NavBar handleForm={handleForm} />
       <Container maxWidth="xl" sx={{ mt: 3, pb: 3 }}>
         <ActivityDashboard
           activities={activities}
           activity={activity}
           handleActivity={handleActivity}
           cancelActivity={cancelActivity}
+          handleForm={handleForm}
+          editMode={editMode}
+          closeForm={closeForm}
         />
       </Container>
     </Box>

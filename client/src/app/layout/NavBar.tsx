@@ -9,7 +9,11 @@ import {
 } from "@mui/material";
 import { Group } from "@mui/icons-material";
 
-export default function NavBar() {
+type Props = {
+  handleForm(): void;
+};
+
+export default function NavBar({ handleForm }: Props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -61,7 +65,12 @@ export default function NavBar() {
               </Button>
             </Stack>
 
-            <Button size="large" variant="contained" color="warning">
+            <Button
+              onClick={handleForm}
+              size="large"
+              variant="contained"
+              color="warning"
+            >
               Create Activity
             </Button>
           </Toolbar>
